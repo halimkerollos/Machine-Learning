@@ -1,0 +1,1 @@
+This is a section of algorithms dedicated to making predictions based upon neighboring data points. Simple, and easy to apply for simple and relatively smaller datasets. Predictions become less accurate with massive data sets, with several caterories.
