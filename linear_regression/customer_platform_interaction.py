@@ -32,8 +32,6 @@ get_ipython().run_line_magic("matplotlib", "inline")
 # ** Read in the Ecommerce Customers
 # csv file as a DataFrame called customers.**
 
-# In[3]:
-
 
 df = pd.read_csv("Ecommerce Customers")
 df.head()
@@ -42,19 +40,13 @@ df.head()
 # **Check the head of customers, and check out its info()
 # and describe() methods.**
 
-# In[4]:
-
 
 df.info()
 
 
-# In[5]:
-
 
 df.describe()
 
-
-# In[6]:
 
 
 sns.pairplot(df)
@@ -71,21 +63,15 @@ sns.pairplot(df)
 # to compare the Time on Website and Yearly Amount Spent columns.
 # Does the correlation make sense?**
 
-# In[7]:
-
 
 sns.jointplot(x="Yearly Amount Spent", y="Time on Website", data=df)
 
 
 # ** Do the same but with the Time on App column instead. **
 
-# In[8]:
-
 
 sns.jointplot(x="Yearly Amount Spent", y="Time on App", data=df)
 
-
-# In[9]:
 
 
 sns.lmplot(x="Yearly Amount Spent", y="Time on App", data=df)
@@ -93,8 +79,6 @@ sns.lmplot(x="Yearly Amount Spent", y="Time on App", data=df)
 
 # ** Use jointplot to create a 2D hex bin plot comparing
 # Time on App and Length of Membership.**
-
-# In[10]:
 
 
 sns.jointplot(x="Length of Membership", y="Time on App", data=df, kind="hex")
@@ -112,8 +96,6 @@ sns.jointplot(x="Length of Membership", y="Time on App", data=df, kind="hex")
 # **Create a linear model plot (using seaborn's lmplot) of
 # Yearly Amount Spent vs. Length of Membership. **
 
-# In[11]:
-
 
 sns.lmplot(x="Length of Membership", y="Yearly Amount Spent", data=df)
 
@@ -126,19 +108,13 @@ sns.lmplot(x="Length of Membership", y="Yearly Amount Spent", data=df)
 # features of the customers and a variable y equal
 # to the "Yearly Amount Spent" column. **
 
-# In[12]:
-
 
 df.head()
 
 
-# In[13]:
-
 
 df.columns
 
-
-# In[14]:
 
 
 X = df[
@@ -156,8 +132,6 @@ y = df["Yearly Amount Spent"]
 # sklearn to split the data into training and testing sets.
 # Set test_size=0.3 and random_state=101**
 
-# In[16]:
-
 
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.3, random_state=101
@@ -172,15 +146,11 @@ X_train, X_test, y_train, y_test = train_test_split(
 
 # **Create an instance of a LinearRegression() model named lm.**
 
-# In[18]:
-
 
 lm = LinearRegression()
 
 
 # ** Train/fit lm on the training data.**
-
-# In[19]:
 
 
 lm.fit(X_train, y_train)
@@ -188,13 +158,9 @@ lm.fit(X_train, y_train)
 
 # **Print out the coefficients of the model**
 
-# In[20]:
-
 
 lm.coef_
 
-
-# In[21]:
 
 
 lm.intercept_
@@ -206,16 +172,12 @@ lm.intercept_
 #
 # ** Use lm.predict() to predict off the X_test set of the data.*
 
-# In[22]:
-
 
 pred = lm.predict(X_test)
 
 
 # ** Create a scatterplot of the real test values
 # versus the predicted values. **
-
-# In[23]:
 
 
 plt.scatter(y_test, pred)
@@ -233,15 +195,11 @@ plt.scatter(y_test, pred)
 # ** Calculate the Mean Absolute Error,
 # Mean Squared Error, and the Root Mean Squared Error.
 
-# In[25]:
-
 
 print("MAE:", metrics.mean_absolute_error(y_test, pred))
 print("MSE:", metrics.mean_squared_error(y_test, pred))
 print("RMSE:", np.sqrt(metrics.mean_squared_error(y_test, pred)))
 
-
-# In[26]:
 
 
 metrics.explained_variance_score(y_test, pred)
@@ -262,8 +220,6 @@ metrics.explained_variance_score(y_test, pred)
 # it looks normally distributed.
 # Use either seaborn distplot, or just plt.hist().**
 
-# In[27]:
-
 
 sns.displot(y_test - pred, bins=50, kde=True)
 
@@ -277,19 +233,13 @@ sns.displot(y_test - pred, bins=50, kde=True)
 #
 # ** Recreate the dataframe below. **
 
-# In[28]:
-
 
 X_train.columns
 
 
-# In[29]:
-
 
 lm.coef_
 
-
-# In[30]:
 
 
 cdf = pd.DataFrame(lm.coef_, X_train.columns, columns=["Coeff"])
